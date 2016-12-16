@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+command=$(basename "$0")
+
+usage() {
+    echo "Usage: $command <command>"
+    echo "Valid commands are:"
+    local subcommands
+    local subcommand
+    readarray subcommands < <(listSubCommands "$command")
+    for subcommand in "${subcommands[@]}" ; do
+      printf "  %s" "${subcommand#$command-}"
+    done
+}
+
+die() {
+    local exitCode="$1"
+    shift
+    (
+        echo "Error: $@"
+        usage
+    ) 1>&2
+    exit "$exitCode"
+}
+
+listSubCommands() {
+    local command="$1"
+    local paths
+    local path
+    local file
+    IFS=":" read -r -a paths <<<"$PATH"
+    for path in "${paths[@]}" ; do
+        (
+            shopt -s nullglob
+            for file in "$path/$command-"* ; do
+                if [[ -x "$file" ]] ; then
+                    printf "%s\n" $(basename "$file")
+                fi
+            done
+        )
+    done
+}
+
+subcommand="$1"
+shift
+if [[ "$subcommand" == "" ]]; then
+    die 1 "No command specified"
+else
+    "gasmask-$subcommand" "$@"
+fi

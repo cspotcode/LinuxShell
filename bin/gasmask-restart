@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Restart gasmask, which causes it to pick up changes in hosts file
+
+set -e
+kill "$( pgrep -f -x "/Applications/Gas Mask\\.app/Contents/MacOS/Gas Mask( #reopen#)?" | sed -n -e "1p" )"
+"/Applications/Gas Mask.app/Contents/MacOS/Gas Mask" "#reopen#" &

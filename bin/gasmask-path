@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Print path to a local Gas Mask hosts file
+
+name="$1"
+path="$HOME/Library/Gas Mask/Local/$name.hst"
+
+if [[ -e "$path" ]] ; then
+    printf "%s" "$path"
+else
+    printf "No such hosts profile: %s\n" "$name" 1>&2
+    exit 1
+fi
