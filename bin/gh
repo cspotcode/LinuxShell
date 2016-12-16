@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+user="$1"
+project="$2"
+if [[ "$project" == "" ]]
+then
+  project="$user"
+  user="cspotcode"
+fi
+printf "https://github.com/%s/%s" "$user" "$project"

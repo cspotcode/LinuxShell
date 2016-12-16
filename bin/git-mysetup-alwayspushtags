@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Configure remote "me" to automatically push branches and tags when I `git push`
+
+git config --add remote.me.push "+refs/heads/*"
+git config --add remote.me.push "+refs/tags/*"

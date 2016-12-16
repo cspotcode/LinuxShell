@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+if [[ $# = 0 ]]
+then
+    printf $(<<'ENDDOC'
+Moves a branch both locally and in a remote repository.
+1. Moves the branch locally.
+2. Pushes the moved branch to the remote.
+3. Deletes the old branch name from the remote.
+
+Usage:
+  git mv-branch [REMOTE] OLD-BRANCH NEW-BRANCH
+ENDDOC
+    )
+    exit
+fi
+
+if [[ "$#" < 3 ]]
+then
+    >&2 printf "You must name remote, a source, and a destination branch."
+    exit 1
+fi
+REMOTE="$1"
+BRANCHSRC="$2"
+BRANCHDEST="$3"
+
+# Move the branch
+git branch -m "$BRANCHSRC" "$BRANCHDEST"
+# Push the new branch and update its tracking info to track the new branch name on remote
+git push -u "$REMOTE" "$BRANCHDEST":"$BRANCHDEST"
+# Delete the old branch from the remote
+git push "$REMOTE" :"$BRANCHSRC"

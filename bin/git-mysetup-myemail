@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# All commits should be from my personal email
+git config user.email "cspotcode@gmail.com"

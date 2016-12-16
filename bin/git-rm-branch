@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [[ $# = 0 ]]
+then
+    printf $(<<'ENDDOC'
+Deletes a branch both locally and in a remote repository.
+1. Delete the branch locally.
+2. Deletes the branch name from the remote.
+
+Usage:
+  git rm-branch <REMOTE> <BRANCH>
+ENDDOC
+    )
+    exit
+fi
+
+# Normalize and read arguments
+if [[ "$#" < 2 ]]
+then
+    >&2 printf "You must name remote and a branch."
+    exit 1
+fi
+REMOTE="$1"
+BRANCH="$2"
+
+# Delete the branch
+git branch -d "$BRANCH"
+# Delete the branch from the remote
+git push "$REMOTE" :"$BRANCH"

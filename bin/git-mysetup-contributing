@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Run this for repos where:
+#   This is a project owned by someone else.
+#   I've forked it and I'm contributing patches.
+
+# Add remote "me" that points to my fork
+regex=".*https://github.com/([^/]+)/([^/ ]+).*"
+echo $regex
+remotes=`git remote -v`
+while read remote ; do
+    echo $remote
+    [[ $remote =~ $regex ]]
+    ownerAccountName=${BASH_REMATCH[1]}
+    projectName=${BASH_REMATCH[2]}
+    if [[ "${BASH_REMATCH[0]}" != "" && "$ownerAccountName" != "cspotcode" ]] ; then break ; fi
+done <<< "$remotes"
+git remote add me https://github.com/cspotcode/$projectName
+
+# I would rather contributions to open-source come from my personal email address
+git config user.email "cspotcode@gmail.com"

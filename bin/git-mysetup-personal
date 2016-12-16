@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Run this for repos where:
+#   This is a personal project that I own
+git-mysetup-myemail
+git remote add me "$(gh "$( basename $PWD )")"

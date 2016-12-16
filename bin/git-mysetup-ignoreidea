@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Ensure .git/info/exclude contains .idea and .vscode to ignore IntelliJ and VSCode directories
+if [[ `cat .git/info/exclude | grep "^.idea$"` == "" ]] ; then
+    echo $'\n\n# Ignore IntelliJ project files\n.idea' >> .git/info/exclude
+fi
+if [[ `cat .git/info/exclude | grep "^.vscode$"` == "" ]] ; then
+    echo $'\n\n# Ignore VSCode project files\n.vscode' >> .git/info/exclude
+fi
+

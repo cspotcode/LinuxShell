@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Run this if all commits should be from my work email
+git config user.email "abradley@brightcove.com"
