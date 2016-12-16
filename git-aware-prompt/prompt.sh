@@ -1,11 +1,18 @@
 find_git_branch() {
   # Based on: http://stackoverflow.com/a/13003854/170413
   local branch
+  local description
   if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
       branch='detached*'
+      if description=$((
+        ( contains=$( git describe --contains HEAD ) && echo "${contains%^0}" ) \
+        || git describe HEAD
+      ) 2> /dev/null); then
+        description=" at $description"
+      fi
     fi
-    git_branch="($branch)"
+    git_branch="($branch$description)"
   else
     git_branch=""
   fi
