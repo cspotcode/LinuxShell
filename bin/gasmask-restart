@@ -4,4 +4,7 @@
 
 set -e
 kill "$( pgrep -f -x "/Applications/Gas Mask\\.app/Contents/MacOS/Gas Mask( #reopen#)?" | sed -n -e "1p" )"
-"/Applications/Gas Mask.app/Contents/MacOS/Gas Mask" "#reopen#" &
+open -a "Gas Mask"
+
+# Old method of launching the app was:
+#"/Applications/Gas Mask.app/Contents/MacOS/Gas Mask" "#reopen#" &
