@@ -1,0 +1,3 @@
+[submodule "thinkpad-keyboard-fnlock"]
+	path = thinkpad-keyboard-fnlock
+	url = https://github.com/cspotcode/thinkpad-keyboard-fnlock
