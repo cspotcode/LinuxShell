@@ -1,4 +1,4 @@
-Scripts, profile configs, and all the other little things that make the Linux / Mac shell feel like home.
+Scripts, profile configs, and all the other little things that make the bash shell feel like home.
 
 | Dir | Purpose |
 |---|---|
