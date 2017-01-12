@@ -46,5 +46,5 @@ shift
 if [[ "$subcommand" == "" ]]; then
     die 1 "No command specified"
 else
-    "gasmask-$subcommand" "$@"
+    "$command-$subcommand" "$@"
 fi
