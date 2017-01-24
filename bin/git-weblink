@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Return a URL to view this commit online
+# Currently assumes github remote; should be extended to support others
+
+# TODO allow specifying the origin
+commit="$1"
+
+remote="$( git config --get remote.default )"
+if [[ "$remote" == "" ]] ; then
+    remote="origin"
+fi
+
+if [[ "$commit" == "" ]] ; then
+    commit="HEAD"
+fi
+
+sha="$( git rev-parse "$commit" )"
+
+remoteUrl="$( git config --get "remote.${remote}.url" )"
+if [[ "$remoteUrl" =~ https://github.com/([^/]+/[^/.]+)(\.git|.{0})$ ]]; then
+    webUrl="https://github.com/${BASH_REMATCH[1]}/commit/${sha}"
+else
+    echo "Error: URL of remote "${remote}" is not in a recognized format" 1>&2
+    exit 1
+fi
+
+printf "%s" "$webUrl"
+

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+# Copy to the clipboard a link to view this commit online.
+
+git weblink "$@" | pbcopy
+
