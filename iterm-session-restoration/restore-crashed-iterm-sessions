@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+__dirname="$(CDPATH= cd "$(dirname "$( readlink "${BASH_SOURCE[0]}" || printf "%s" "${BASH_SOURCE[0]}" )")" && pwd)"
+cd "$__dirname"
+
+osascript ./restore-crashed-iterm-sessions.applescript
